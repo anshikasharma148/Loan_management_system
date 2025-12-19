@@ -5,11 +5,19 @@ const http = require('http');
 const KEEP_ALIVE_INTERVAL = 14 * 60 * 1000; // 14 minutes in milliseconds
 
 const keepAlive = () => {
-  // Get server URL from environment or use default
-  const serverUrl = process.env.RENDER_EXTERNAL_URL || 
-                    process.env.SERVER_URL || 
-                    'https://loan-management-system-xcuu.onrender.com';
-  
+  // Get server URL from environment or use hardcoded production URL
+  const getServerUrl = () => {
+    if (process.env.RENDER_EXTERNAL_URL) {
+      return process.env.RENDER_EXTERNAL_URL;
+    }
+    if (process.env.SERVER_URL) {
+      return process.env.SERVER_URL;
+    }
+    // Fallback to production URL
+    return 'https://loan-management-system-xcuu.onrender.com';
+  };
+
+  const serverUrl = getServerUrl();
   const url = `${serverUrl}/api/keep-alive`;
   const isHttps = url.startsWith('https');
   const client = isHttps ? https : http;
@@ -39,13 +47,15 @@ const keepAlive = () => {
     }
   };
 
-  // Start pinging after 1 minute (to let server fully start)
+  // Start pinging after 2 minutes (to let server fully start and get RENDER_EXTERNAL_URL)
   setTimeout(() => {
+    const finalUrl = getServerUrl();
+    console.log(`[Keep-Alive] Starting with URL: ${finalUrl}`);
     makeRequest();
     // Then ping every 14 minutes
     setInterval(makeRequest, KEEP_ALIVE_INTERVAL);
-    console.log(`[Keep-Alive] Started. Pinging server every ${KEEP_ALIVE_INTERVAL / 60000} minutes`);
-  }, 60000); // Wait 1 minute before first ping
+    console.log(`[Keep-Alive] Active. Pinging server every ${KEEP_ALIVE_INTERVAL / 60000} minutes`);
+  }, 120000); // Wait 2 minutes before first ping to ensure RENDER_EXTERNAL_URL is available
 };
 
 module.exports = keepAlive;
