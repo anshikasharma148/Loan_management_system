@@ -39,7 +39,11 @@ export default function OngoingLoansPage() {
     return (
       <Layout>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-500">Loading...</div>
+          <div className="flex items-center space-x-2 text-slate-500">
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce"></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+          </div>
         </div>
       </Layout>
     );
@@ -47,17 +51,22 @@ export default function OngoingLoansPage() {
 
   return (
     <Layout>
-      <div className="px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Ongoing Loans</h1>
+      <div className="px-4 sm:px-6 lg:px-8 animate-fade-in">
+        <div className="mb-8 animate-slide-down">
+          <h1 className="text-4xl font-bold gradient-text mb-2">Ongoing Loans</h1>
+          <p className="text-slate-600">View all active and disbursed loans</p>
+        </div>
 
         {applications.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500">No ongoing loans found</p>
+          <div className="text-center py-16 glass-effect rounded-xl">
+            <p className="text-slate-500">No ongoing loans found</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {applications.map((application) => (
-              <LoanApplicationCard key={application._id} application={application} />
+            {applications.map((application, index) => (
+              <div key={application._id} style={{ animationDelay: `${index * 0.05}s` }} className="animate-scale-in">
+                <LoanApplicationCard application={application} />
+              </div>
             ))}
           </div>
         )}

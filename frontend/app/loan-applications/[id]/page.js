@@ -73,7 +73,11 @@ export default function LoanApplicationDetailPage() {
     return (
       <Layout>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-500">Loading...</div>
+          <div className="flex items-center space-x-2 text-slate-500">
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce"></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+          </div>
         </div>
       </Layout>
     );
@@ -82,8 +86,8 @@ export default function LoanApplicationDetailPage() {
   if (!application) {
     return (
       <Layout>
-        <div className="text-center py-12">
-          <p className="text-gray-500">Application not found</p>
+        <div className="text-center py-16 glass-effect rounded-xl">
+          <p className="text-slate-500">Application not found</p>
         </div>
       </Layout>
     );
@@ -91,88 +95,88 @@ export default function LoanApplicationDetailPage() {
 
   return (
     <Layout>
-      <div className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
+      <div className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto animate-fade-in">
+        <div className="flex justify-between items-center mb-8 animate-slide-down">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Loan Application Details</h1>
-            <p className="text-gray-500 mt-1">Application #: {application.applicationNumber}</p>
+            <h1 className="text-4xl font-bold gradient-text mb-2">Loan Application Details</h1>
+            <p className="text-slate-600 font-mono">Application #: {application.applicationNumber}</p>
           </div>
           <StatusBadge status={application.status} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Customer Information */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Customer Information</h2>
-            <div className="space-y-3">
-              <div>
-                <p className="text-sm text-gray-500">Name</p>
-                <p className="font-medium">{application.customerInfo?.name}</p>
+          <div className="glass-effect rounded-xl p-6 animate-scale-in">
+            <h2 className="text-xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200">Customer Information</h2>
+            <div className="space-y-4">
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Name</p>
+                <p className="font-bold text-slate-900">{application.customerInfo?.name}</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">PAN</p>
-                <p className="font-medium">{application.customerInfo?.pan}</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">PAN</p>
+                <p className="font-semibold text-slate-900 font-mono">{application.customerInfo?.pan}</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Aadhaar</p>
-                <p className="font-medium">{application.customerInfo?.aadhaar}</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Aadhaar</p>
+                <p className="font-semibold text-slate-900 font-mono">{application.customerInfo?.aadhaar}</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Email</p>
-                <p className="font-medium">{application.customerInfo?.email}</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Email</p>
+                <p className="font-semibold text-slate-900">{application.customerInfo?.email}</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Phone</p>
-                <p className="font-medium">{application.customerInfo?.phone}</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Phone</p>
+                <p className="font-semibold text-slate-900">{application.customerInfo?.phone}</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Address</p>
-                <p className="font-medium">{application.customerInfo?.address}</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Address</p>
+                <p className="font-semibold text-slate-900">{application.customerInfo?.address}</p>
               </div>
             </div>
           </div>
 
           {/* Loan Details */}
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Loan Details</h2>
-            <div className="space-y-3">
-              <div>
-                <p className="text-sm text-gray-500">Product</p>
-                <p className="font-medium">
+          <div className="glass-effect rounded-xl p-6 animate-scale-in" style={{ animationDelay: '0.1s' }}>
+            <h2 className="text-xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200">Loan Details</h2>
+            <div className="space-y-4">
+              <div className="p-3 rounded-lg bg-accent-50 border border-accent-200">
+                <p className="text-xs font-semibold text-accent-700 uppercase tracking-wide mb-1">Product</p>
+                <p className="font-bold text-slate-900">
                   {typeof application.loanProductId === 'object'
                     ? application.loanProductId.name
                     : 'N/A'}
                 </p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Requested Amount</p>
-                <p className="font-medium text-lg">{formatCurrency(application.requestedAmount)}</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Requested Amount</p>
+                <p className="font-bold text-2xl text-slate-900">{formatCurrency(application.requestedAmount)}</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">LTV Ratio</p>
-                <p className="font-medium text-lg">{application.calculatedLTV?.toFixed(2)}%</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">LTV Ratio</p>
+                <p className="font-bold text-xl text-slate-900">{application.calculatedLTV?.toFixed(2)}%</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Interest Rate</p>
-                <p className="font-medium text-lg">{application.interestRate?.toFixed(2)}%</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Interest Rate</p>
+                <p className="font-bold text-xl text-slate-900">{application.interestRate?.toFixed(2)}%</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Tenure</p>
-                <p className="font-medium">{application.tenure} months</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Tenure</p>
+                <p className="font-bold text-slate-900">{application.tenure} months</p>
               </div>
-              <div>
-                <p className="text-sm text-gray-500">Collateral Value</p>
-                <p className="font-medium text-lg">{formatCurrency(application.collateralValue)}</p>
+              <div className="p-3 rounded-lg bg-slate-50">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Collateral Value</p>
+                <p className="font-bold text-xl text-slate-900">{formatCurrency(application.collateralValue)}</p>
               </div>
               {application.disbursedAmount && (
                 <>
-                  <div>
-                    <p className="text-sm text-gray-500">Disbursed Amount</p>
-                    <p className="font-medium text-lg">{formatCurrency(application.disbursedAmount)}</p>
+                  <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200">
+                    <p className="text-xs font-semibold text-emerald-700 uppercase tracking-wide mb-1">Disbursed Amount</p>
+                    <p className="font-bold text-xl text-slate-900">{formatCurrency(application.disbursedAmount)}</p>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-500">Disbursed Date</p>
-                    <p className="font-medium">{formatDate(application.disbursedDate)}</p>
+                  <div className="p-3 rounded-lg bg-slate-50">
+                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">Disbursed Date</p>
+                    <p className="font-semibold text-slate-900">{formatDate(application.disbursedDate)}</p>
                   </div>
                 </>
               )}
@@ -182,27 +186,27 @@ export default function LoanApplicationDetailPage() {
 
         {/* Mutual Funds */}
         {application.mutualFunds && application.mutualFunds.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 className="text-xl font-semibold mb-4">Mutual Fund Holdings</h2>
+          <div className="glass-effect rounded-xl p-6 mb-6 animate-scale-in" style={{ animationDelay: '0.2s' }}>
+            <h2 className="text-xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200">Mutual Fund Holdings</h2>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-slate-200">
+                <thead className="bg-slate-50">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fund Name</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">AMC</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Units</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">NAV</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Value</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Fund Name</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">AMC</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Units</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">NAV</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Value</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y divide-slate-200">
                   {application.mutualFunds.map((fund, index) => (
-                    <tr key={index}>
-                      <td className="px-4 py-3 text-sm">{fund.fundName}</td>
-                      <td className="px-4 py-3 text-sm">{fund.amc}</td>
-                      <td className="px-4 py-3 text-sm">{fund.units?.toLocaleString('en-IN')}</td>
-                      <td className="px-4 py-3 text-sm">₹{fund.currentNAV?.toLocaleString('en-IN')}</td>
-                      <td className="px-4 py-3 text-sm font-medium">{formatCurrency(fund.totalValue)}</td>
+                    <tr key={index} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-4 py-3 text-sm font-semibold text-slate-900">{fund.fundName}</td>
+                      <td className="px-4 py-3 text-sm text-slate-600">{fund.amc}</td>
+                      <td className="px-4 py-3 text-sm text-slate-600">{fund.units?.toLocaleString('en-IN')}</td>
+                      <td className="px-4 py-3 text-sm text-slate-600">₹{fund.currentNAV?.toLocaleString('en-IN')}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-slate-900">{formatCurrency(fund.totalValue)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -213,28 +217,28 @@ export default function LoanApplicationDetailPage() {
 
         {/* Collaterals */}
         {collaterals.length > 0 && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 className="text-xl font-semibold mb-4">Collaterals</h2>
+          <div className="glass-effect rounded-xl p-6 mb-6 animate-scale-in" style={{ animationDelay: '0.3s' }}>
+            <h2 className="text-xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200">Collaterals</h2>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+              <table className="min-w-full divide-y divide-slate-200">
+                <thead className="bg-slate-50">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Fund Name</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Folio</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Units</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">NAV</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Value</th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Fund Name</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Folio</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Units</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">NAV</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Value</th>
+                    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-700 uppercase">Status</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y divide-slate-200">
                   {collaterals.map((collateral) => (
-                    <tr key={collateral._id}>
-                      <td className="px-4 py-3 text-sm">{collateral.fundName}</td>
-                      <td className="px-4 py-3 text-sm">{collateral.folioNumber}</td>
-                      <td className="px-4 py-3 text-sm">{collateral.units?.toLocaleString('en-IN')}</td>
-                      <td className="px-4 py-3 text-sm">₹{collateral.currentNAV?.toLocaleString('en-IN')}</td>
-                      <td className="px-4 py-3 text-sm font-medium">{formatCurrency(collateral.totalValue)}</td>
+                    <tr key={collateral._id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-4 py-3 text-sm font-semibold text-slate-900">{collateral.fundName}</td>
+                      <td className="px-4 py-3 text-sm text-slate-600 font-mono">{collateral.folioNumber}</td>
+                      <td className="px-4 py-3 text-sm text-slate-600">{collateral.units?.toLocaleString('en-IN')}</td>
+                      <td className="px-4 py-3 text-sm text-slate-600">₹{collateral.currentNAV?.toLocaleString('en-IN')}</td>
+                      <td className="px-4 py-3 text-sm font-bold text-slate-900">{formatCurrency(collateral.totalValue)}</td>
                       <td className="px-4 py-3 text-sm">
                         <StatusBadge status={collateral.pledgeStatus} type="pledge" />
                       </td>
@@ -248,14 +252,14 @@ export default function LoanApplicationDetailPage() {
 
         {/* Status Update Actions */}
         {(user?.role === 'admin' || user?.role === 'loan_officer') && (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-4">Update Status</h2>
-            <div className="flex flex-wrap gap-2">
+          <div className="glass-effect rounded-xl p-6 animate-scale-in" style={{ animationDelay: '0.4s' }}>
+            <h2 className="text-xl font-bold text-slate-900 mb-6 pb-2 border-b border-slate-200">Update Status</h2>
+            <div className="flex flex-wrap gap-3">
               {application.status === 'pending' && (
                 <button
                   onClick={() => handleStatusUpdate('under_review')}
                   disabled={updating}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+                  className="px-6 py-3 bg-gradient-to-r from-accent-600 to-accent-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-accent-700 hover:to-accent-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:-translate-y-0.5"
                 >
                   Move to Under Review
                 </button>
@@ -265,14 +269,14 @@ export default function LoanApplicationDetailPage() {
                   <button
                     onClick={() => handleStatusUpdate('approved')}
                     disabled={updating}
-                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50"
+                    className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-emerald-700 hover:to-emerald-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:-translate-y-0.5"
                   >
                     Approve
                   </button>
                   <button
                     onClick={() => handleStatusUpdate('rejected')}
                     disabled={updating}
-                    className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50"
+                    className="px-6 py-3 bg-gradient-to-r from-rose-600 to-rose-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-rose-700 hover:to-rose-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:-translate-y-0.5"
                   >
                     Reject
                   </button>
@@ -282,7 +286,7 @@ export default function LoanApplicationDetailPage() {
                 <button
                   onClick={() => handleStatusUpdate('disbursed')}
                   disabled={updating}
-                  className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:opacity-50"
+                  className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-indigo-700 hover:to-indigo-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:-translate-y-0.5"
                 >
                   Mark as Disbursed
                 </button>
@@ -291,7 +295,7 @@ export default function LoanApplicationDetailPage() {
                 <button
                   onClick={() => handleStatusUpdate('closed')}
                   disabled={updating}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 disabled:opacity-50"
+                  className="px-6 py-3 bg-gradient-to-r from-slate-600 to-slate-700 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl hover:from-slate-700 hover:to-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:-translate-y-0.5"
                 >
                   Close Loan
                 </button>

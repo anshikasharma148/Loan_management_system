@@ -54,69 +54,76 @@ export default function Dashboard() {
     return (
       <Layout>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-500">Loading...</div>
+          <div className="flex items-center space-x-2 text-slate-500">
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce"></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+          </div>
         </div>
       </Layout>
     );
   }
 
+  const statCards = [
+    { label: 'Total Applications', value: stats.totalApplications, href: '/loan-applications', color: 'accent' },
+    { label: 'Ongoing Loans', value: stats.ongoingLoans, href: '/ongoing-loans', color: 'slate' },
+    { label: 'Total Collaterals', value: stats.totalCollaterals, href: '/collaterals', color: 'accent' },
+    { label: 'Loan Products', value: stats.totalProducts, href: '/loan-products', color: 'slate' },
+  ];
+
   return (
     <Layout>
-      <div className="px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Dashboard</h1>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Total Applications</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">{stats.totalApplications}</p>
-            <Link href="/loan-applications" className="text-primary-600 text-sm mt-2 inline-block">
-              View all →
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Ongoing Loans</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">{stats.ongoingLoans}</p>
-            <Link href="/ongoing-loans" className="text-primary-600 text-sm mt-2 inline-block">
-              View all →
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Total Collaterals</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">{stats.totalCollaterals}</p>
-            <Link href="/collaterals" className="text-primary-600 text-sm mt-2 inline-block">
-              View all →
-            </Link>
-          </div>
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-sm font-medium text-gray-500">Loan Products</h3>
-            <p className="text-3xl font-bold text-gray-900 mt-2">{stats.totalProducts}</p>
-            <Link href="/loan-products" className="text-primary-600 text-sm mt-2 inline-block">
-              View all →
-            </Link>
-          </div>
+      <div className="px-4 sm:px-6 lg:px-8 animate-fade-in">
+        <div className="mb-8 animate-slide-down">
+          <h1 className="text-4xl font-bold gradient-text mb-2">Dashboard</h1>
+          <p className="text-slate-600">Welcome back! Here's an overview of your loan management system.</p>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {statCards.map((card, index) => (
+            <div
+              key={card.label}
+              className="glass-effect rounded-xl p-6 card-hover animate-slide-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-medium text-slate-600 uppercase tracking-wide">{card.label}</h3>
+                <div className={`w-10 h-10 rounded-lg bg-${card.color}-50 flex items-center justify-center`}>
+                  <div className={`w-3 h-3 rounded-full bg-${card.color}-500`}></div>
+                </div>
+              </div>
+              <p className="text-4xl font-bold text-slate-900 mb-4">{card.value}</p>
+              <Link
+                href={card.href}
+                className="text-sm font-medium text-accent-600 hover:text-accent-700 inline-flex items-center group"
+              >
+                View all
+                <svg className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        <div className="glass-effect rounded-xl p-8 card-hover animate-slide-up" style={{ animationDelay: '0.4s' }}>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Link
               href="/loan-applications/new"
-              className="px-4 py-3 bg-primary-600 text-white rounded-md hover:bg-primary-700 text-center transition-colors"
+              className="group px-6 py-4 bg-gradient-to-r from-accent-600 to-accent-700 text-white rounded-lg text-center font-medium shadow-lg hover:shadow-xl hover:from-accent-700 hover:to-accent-800 transition-all duration-300 transform hover:-translate-y-0.5"
             >
               Create New Application
             </Link>
             <Link
               href="/loan-products"
-              className="px-4 py-3 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 text-center transition-colors"
+              className="group px-6 py-4 glass-effect rounded-lg text-center font-medium text-slate-700 hover:bg-slate-50 transition-all duration-300"
             >
               Manage Products
             </Link>
             <Link
               href="/api-docs"
-              className="px-4 py-3 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 text-center transition-colors"
+              className="group px-6 py-4 glass-effect rounded-lg text-center font-medium text-slate-700 hover:bg-slate-50 transition-all duration-300"
             >
               API Documentation
             </Link>

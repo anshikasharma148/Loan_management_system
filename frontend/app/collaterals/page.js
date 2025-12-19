@@ -42,7 +42,11 @@ export default function CollateralsPage() {
     return (
       <Layout>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-500">Loading...</div>
+          <div className="flex items-center space-x-2 text-slate-500">
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce"></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+          </div>
         </div>
       </Layout>
     );
@@ -50,14 +54,17 @@ export default function CollateralsPage() {
 
   return (
     <Layout>
-      <div className="px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Collateral Management</h1>
+      <div className="px-4 sm:px-6 lg:px-8 animate-fade-in">
+        <div className="mb-8 animate-slide-down">
+          <h1 className="text-4xl font-bold gradient-text mb-2">Collateral Management</h1>
+          <p className="text-slate-600">Track and manage all mutual fund collaterals</p>
+        </div>
 
-        <div className="mb-6">
+        <div className="mb-6 animate-slide-up">
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent bg-white text-slate-700 font-medium transition-all"
           >
             <option value="all">All Collaterals</option>
             <option value="pledged">Pledged</option>
@@ -67,71 +74,73 @@ export default function CollateralsPage() {
         </div>
 
         {collaterals.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500">No collaterals found</p>
+          <div className="text-center py-16 glass-effect rounded-xl">
+            <p className="text-slate-500">No collaterals found</p>
           </div>
         ) : (
-          <div className="bg-white rounded-lg shadow overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Fund Name
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    AMC
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Folio Number
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Units
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    NAV
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Total Value
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Loan Application
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {collaterals.map((collateral) => (
-                  <tr key={collateral._id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {collateral.fundName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {collateral.amc}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {collateral.folioNumber}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {collateral.units.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      ₹{collateral.currentNAV.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {formatCurrency(collateral.totalValue)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <StatusBadge status={collateral.pledgeStatus} type="pledge" />
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {collateral.loanApplicationId?.applicationNumber || 'N/A'}
-                    </td>
+          <div className="glass-effect rounded-xl overflow-hidden shadow-lg animate-scale-in">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-slate-200">
+                <thead className="bg-slate-50">
+                  <tr>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Fund Name
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      AMC
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Folio Number
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Units
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      NAV
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Total Value
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Status
+                    </th>
+                    <th className="px-6 py-4 text-left text-xs font-semibold text-slate-700 uppercase tracking-wider">
+                      Loan Application
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="bg-white divide-y divide-slate-200">
+                  {collaterals.map((collateral) => (
+                    <tr key={collateral._id} className="hover:bg-slate-50 transition-colors">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900">
+                        {collateral.fundName}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
+                        {collateral.amc}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600 font-mono">
+                        {collateral.folioNumber}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
+                        {collateral.units.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600">
+                        ₹{collateral.currentNAV.toLocaleString('en-IN', { maximumFractionDigits: 2 })}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">
+                        {formatCurrency(collateral.totalValue)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <StatusBadge status={collateral.pledgeStatus} type="pledge" />
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-600 font-mono">
+                        {collateral.loanApplicationId?.applicationNumber || 'N/A'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>

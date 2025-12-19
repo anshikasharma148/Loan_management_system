@@ -41,7 +41,11 @@ export default function LoanApplicationsPage() {
     return (
       <Layout>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-500">Loading...</div>
+          <div className="flex items-center space-x-2 text-slate-500">
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce"></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+            <div className="w-2 h-2 bg-accent-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+          </div>
         </div>
       </Layout>
     );
@@ -49,16 +53,17 @@ export default function LoanApplicationsPage() {
 
   return (
     <Layout>
-      <div className="px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Loan Applications</h1>
+      <div className="px-4 sm:px-6 lg:px-8 animate-fade-in">
+        <div className="mb-8 animate-slide-down">
+          <h1 className="text-4xl font-bold gradient-text mb-2">Loan Applications</h1>
+          <p className="text-slate-600">View and manage all loan applications</p>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 animate-slide-up">
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-transparent bg-white text-slate-700 font-medium transition-all"
           >
             <option value="all">All Applications</option>
             <option value="pending">Pending</option>
@@ -71,13 +76,15 @@ export default function LoanApplicationsPage() {
         </div>
 
         {applications.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500">No loan applications found</p>
+          <div className="text-center py-16 glass-effect rounded-xl">
+            <p className="text-slate-500">No loan applications found</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {applications.map((application) => (
-              <LoanApplicationCard key={application._id} application={application} />
+            {applications.map((application, index) => (
+              <div key={application._id} style={{ animationDelay: `${index * 0.05}s` }} className="animate-scale-in">
+                <LoanApplicationCard application={application} />
+              </div>
             ))}
           </div>
         )}

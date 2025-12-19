@@ -30,23 +30,23 @@ export default function Layout({ children }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm border-b">
+    <div className="min-h-screen">
+      <nav className="glass-effect sticky top-0 z-50 border-b border-slate-200/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <h1 className="text-xl font-bold text-primary-600">LAMF LMS</h1>
+                <h1 className="text-xl font-bold text-accent-600">LAMF LMS</h1>
               </div>
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <div className="hidden sm:ml-8 sm:flex sm:space-x-1">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
+                    className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap ${
                       pathname === item.href
-                        ? 'border-primary-500 text-gray-900'
-                        : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                        ? 'bg-accent-50 text-accent-700 shadow-sm'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                     }`}
                   >
                     {item.label}
@@ -54,15 +54,20 @@ export default function Layout({ children }) {
                 ))}
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               {user && (
-                <span className="text-sm text-gray-700">
-                  {user.name} ({user.role})
-                </span>
+                <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-white border border-accent-200 shadow-sm">
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-accent-500 to-accent-600 flex items-center justify-center text-white text-xs font-bold">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                  <span className="text-sm font-semibold text-slate-800">
+                    {user.role === 'admin' ? 'Admin' : user.role === 'loan_officer' ? 'Officer' : 'User'}
+                  </span>
+                </div>
               )}
               <button
                 onClick={handleLogout}
-                className="text-sm text-gray-500 hover:text-gray-700"
+                className="px-3 py-1.5 text-sm font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 hover:border-slate-400 transition-all duration-200 shadow-sm hover:shadow"
               >
                 Logout
               </button>
@@ -70,7 +75,7 @@ export default function Layout({ children }) {
           </div>
         </div>
       </nav>
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto py-8 sm:px-6 lg:px-8 animate-fade-in">
         {children}
       </main>
     </div>
