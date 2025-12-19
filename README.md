@@ -548,15 +548,28 @@ All API responses follow a consistent format:
 
 ## Deployment
 
-### Backend Deployment (Render/Railway)
-1. Set environment variables in your hosting platform
-2. Ensure MongoDB connection string is set
-3. Deploy the backend folder
+### Backend Deployment (Render)
+1. Connect your repository to Render
+2. Create a new Web Service
+3. Set the following environment variables:
+   - `MONGODB_URI` - Your MongoDB connection string
+   - `JWT_SECRET` - Your JWT secret key
+   - `JWT_EXPIRES_IN` - Token expiration (default: 7d)
+   - `NODE_ENV` - Set to `production`
+   - `RENDER_EXTERNAL_URL` - Will be automatically set by Render
+4. Set build command: `cd backend && npm install`
+5. Set start command: `cd backend && npm start`
+6. The server includes a keep-alive mechanism to prevent sleeping
+
+**Live Backend:** https://loan-management-system-xcuu.onrender.com
 
 ### Frontend Deployment (Vercel)
 1. Connect your repository to Vercel
-2. Set `NEXT_PUBLIC_API_URL` to your backend API URL
+2. Set environment variable:
+   - `NEXT_PUBLIC_API_URL` = `https://loan-management-system-xcuu.onrender.com/api`
 3. Deploy
+
+**Live Frontend:** https://loan-management-system-beryl.vercel.app
 
 ## Development
 
