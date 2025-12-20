@@ -88,64 +88,33 @@ lamf-lms/
 
 ## Database Schema
 
-### Users Collection
-- `name` (String, required)
-- `email` (String, required, unique)
-- `password` (String, required, hashed)
-- `role` (String, enum: ['admin', 'loan_officer', 'fintech_partner'])
-- `createdAt`, `updatedAt` (timestamps)
+For detailed database schema documentation, see [SCHEMA.md](./SCHEMA.md).
 
-### LoanProducts Collection
-- `name` (String, required)
-- `description` (String)
-- `minLTV` (Number, 0-100)
-- `maxLTV` (Number, 0-100)
-- `minInterestRate` (Number)
-- `maxInterestRate` (Number)
-- `tenureOptions` (Array of Numbers)
-- `minLoanAmount` (Number)
-- `maxLoanAmount` (Number)
-- `eligibilityCriteria` (String)
-- `isActive` (Boolean, default: true)
-- `createdAt`, `updatedAt` (timestamps)
+### Quick Overview
 
-### LoanApplications Collection
-- `applicationNumber` (String, required, unique, auto-generated)
-- `customerInfo` (Object: name, pan, aadhaar, email, phone, address)
-- `loanProductId` (ObjectId, ref: LoanProduct)
-- `requestedAmount` (Number)
-- `mutualFunds` (Array of fund objects)
-- `calculatedLTV` (Number)
-- `interestRate` (Number)
-- `tenure` (Number)
-- `status` (String, enum: ['pending', 'under_review', 'approved', 'rejected', 'disbursed', 'closed'])
-- `collateralValue` (Number)
-- `disbursedAmount` (Number)
-- `disbursedDate` (Date)
-- `createdBy` (ObjectId, ref: User)
-- `createdAt`, `updatedAt` (timestamps)
+The system uses MongoDB with the following collections:
 
-### Collaterals Collection
-- `loanApplicationId` (ObjectId, ref: LoanApplication)
-- `fundName` (String, required)
-- `schemeCode` (String)
-- `amc` (String, required)
-- `folioNumber` (String, required)
-- `units` (Number, required)
-- `currentNAV` (Number, required)
-- `totalValue` (Number, required)
-- `pledgeStatus` (String, enum: ['pledged', 'unpledged', 'released'])
-- `pledgeDate` (Date)
-- `releaseDate` (Date)
-- `createdAt`, `updatedAt` (timestamps)
+- **Users**: Admin, loan officers, and fintech partners
+- **LoanProducts**: Different loan products with LTV ratios and interest rates
+- **LoanApplications**: All loan applications with customer information and mutual fund details
+- **Collaterals**: Mutual fund units pledged as collateral
+- **APIClients**: API client credentials for fintech partners
 
-### APIClients Collection
-- `clientName` (String, required, unique)
-- `clientId` (String, required, unique)
-- `clientSecret` (String, required, hashed)
-- `apiKey` (String, unique)
-- `isActive` (Boolean, default: true)
-- `createdAt`, `updatedAt` (timestamps)
+### Seed Data
+
+The seed script creates:
+- Admin user: `admin@lamf.com` / `admin123`
+- Loan officer: `officer@lamf.com` / `officer123`
+- API client: `fintech_client_001` / `fintech_secret_123`
+- Sample loan products (Premium, Standard, Basic LAMF)
+- Sample loan applications with different statuses
+- Sample collaterals
+
+Run the seed script:
+```bash
+cd backend
+npm run seed
+```
 
 ## Setup Instructions
 
