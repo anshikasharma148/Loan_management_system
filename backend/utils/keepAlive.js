@@ -14,7 +14,7 @@ const keepAlive = () => {
       return process.env.SERVER_URL;
     }
     // Fallback to production URL
-    return 'https://loan-management-system-xcuu.onrender.com';
+    return 'https://loan-management-system-pxkz.onrender.com';
   };
 
   const serverUrl = getServerUrl();

@@ -15,7 +15,7 @@ export default function APIDocsPage() {
     }
   }, [router]);
 
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://loan-management-system-xcuu.onrender.com/api';
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://loan-management-system-pxkz.onrender.com/api';
 
   return (
     <Layout>

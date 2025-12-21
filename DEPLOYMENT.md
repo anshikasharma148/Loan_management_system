@@ -28,7 +28,7 @@
    - No additional configuration needed
 
 ### Your Backend URL:
-https://loan-management-system-xcuu.onrender.com
+https://loan-management-system-pxkz.onrender.com
 
 ---
 
@@ -46,7 +46,7 @@ https://loan-management-system-xcuu.onrender.com
 
 5. **Environment Variables** (Add in Vercel dashboard):
    ```
-   NEXT_PUBLIC_API_URL=https://loan-management-system-xcuu.onrender.com/api
+   NEXT_PUBLIC_API_URL=https://loan-management-system-pxkz.onrender.com/api
    ```
 
 6. Click "Deploy"
@@ -72,7 +72,7 @@ The keep-alive endpoint is available at: `/api/keep-alive`
 
 1. **Test Backend Health**:
    ```bash
-   curl https://loan-management-system-xcuu.onrender.com/api/health
+   curl https://loan-management-system-pxkz.onrender.com/api/health
    ```
 
 2. **Test Frontend**:
@@ -83,7 +83,7 @@ The keep-alive endpoint is available at: `/api/keep-alive`
 3. **Test API**:
    ```bash
    # Get API token
-   curl -X POST https://loan-management-system-xcuu.onrender.com/api/auth/api-login \
+   curl -X POST https://loan-management-system-pxkz.onrender.com/api/auth/api-login \
      -H "Content-Type: application/json" \
      -d '{"clientId":"fintech_client_001","clientSecret":"fintech_secret_123"}'
    ```
@@ -107,4 +107,5 @@ The keep-alive endpoint is available at: `/api/keep-alive`
 - Backend CORS is configured to allow Vercel domain
 - If you see CORS errors, check backend logs
 - Verify the frontend URL matches the CORS configuration
+
 

@@ -530,12 +530,12 @@ All API responses follow a consistent format:
 5. Set start command: `cd backend && npm start`
 6. The server includes a keep-alive mechanism to prevent sleeping
 
-**Live Backend:** https://loan-management-system-xcuu.onrender.com
+**Live Backend:** https://loan-management-system-pxkz.onrender.com
 
 ### Frontend Deployment (Vercel)
 1. Connect your repository to Vercel
 2. Set environment variable:
-   - `NEXT_PUBLIC_API_URL` = `https://loan-management-system-xcuu.onrender.com/api`
+   - `NEXT_PUBLIC_API_URL` = `https://loan-management-system-pxkz.onrender.com/api`
 3. Deploy
 
 **Live Frontend:** https://loan-management-system-beryl.vercel.app
