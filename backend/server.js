@@ -24,7 +24,12 @@ const corsOptions = {
     }
     
     // Allow all Vercel deployments (preview and production)
-    if (origin.includes('.vercel.app')) {
+    if (origin.includes('.vercel.app') || origin.includes('vercel.app')) {
+      return callback(null, true);
+    }
+    
+    // Allow specific production frontend
+    if (origin === 'https://loan-management-system-beryl.vercel.app') {
       return callback(null, true);
     }
     
